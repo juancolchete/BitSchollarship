@@ -27,7 +27,9 @@ function fillGreenHouse(){
       var color = "#cc4125"
       var greenHouse = "yes"
       sendWarning = true;
-      greenHouseTypes += `${plantType}, `
+      if(!verifyIfExists(greenHouseTypes,plantType)){
+        greenHouseTypes += `${plantType}, `
+      }
     }else{
       var color = "#ffffff"
       var greenHouse = "no"
