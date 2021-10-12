@@ -17,6 +17,8 @@ function getWeather() {
   return weatherPrevisionPlantTypes;
 }
 function fillGreenHouse(){
+  sendWarning = false;
+  greenHouseTypes = ""
   weatherPrevisionPlantTypes = getWeather();
   console.log(weatherPrevisionPlantTypes);
   var lastRowWeather = activeSpreadsheet.getSheetByName("SeedsInfo").getLastRow();
@@ -24,12 +26,18 @@ function fillGreenHouse(){
     if(weatherPrevisionPlantTypes[plantType].greenHouse == true){
       var color = "#cc4125"
       var greenHouse = "yes"
+      sendWarning = true;
+      greenHouseTypes += `${plantType}, `
     }else{
       var color = "#ffffff"
       var greenHouse = "no"
     }
     plantType = activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,2).getValue();
     activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,5).setValue(greenHouse);
-    activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,5).setBackground(color)
+    activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,5).setBackground(color);
   }
+  if(sendWarning){
+      greenHouseTypes = greenHouseTypes.substring(0,greenHouseTypes.length-2);
+      sendMessage("As plantas dos tipos: **"+greenHouseTypes+"** precisam de Green House @everyone");
+    }
 }
