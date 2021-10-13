@@ -20,9 +20,9 @@ function fillGreenHouse(){
   sendWarning = false;
   greenHouseTypes = ""
   weatherPrevisionPlantTypes = getWeather();
-  console.log(weatherPrevisionPlantTypes);
-  var lastRowWeather = activeSpreadsheet.getSheetByName("SeedsInfo").getLastRow();
-  for(i=2;i<=lastRowWeather;i++){
+  var lastSeedInfo = activeSpreadsheet.getSheetByName("SeedsInfo").getLastRow();
+  for(i=2;i<=lastSeedInfo;i++){
+    plantType = activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,2).getValue();
     if(weatherPrevisionPlantTypes[plantType].greenHouse == true){
       var color = "#cc4125"
       var greenHouse = "yes"
@@ -34,7 +34,6 @@ function fillGreenHouse(){
       var color = "#ffffff"
       var greenHouse = "no"
     }
-    plantType = activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,2).getValue();
     activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,5).setValue(greenHouse);
     activeSpreadsheet.getSheetByName("SeedsInfo").getRange(i,5).setBackground(color);
   }
