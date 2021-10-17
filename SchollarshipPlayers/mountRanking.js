@@ -5,11 +5,11 @@ function moutRanking() {
     var rowLightEnergy = activeSpreadsheet.getSheetByName("LightEnergy").getLastRow();
     var rowBonus = activeSpreadsheet.getSheetByName("Bonus").getLastRow();
     var columnLightEnergy = activeSpreadsheet.getSheetByName("LightEnergy").getLastColumn();
-    for(i=2;i<columnLightEnergy+1;i++){
-      lastLightEnergy = normalizeNaN(activeSpreadsheet.getSheetByName("LightEnergy").getRange(rowLightEnergy,i).getValue());
-      lastBonus = normalizeNaN(activeSpreadsheet.getSheetByName("Bonus").getRange(rowBonus,i).getValue());
-      sumSeed = normalizeNaN(activeSpreadsheet.getSheetByName("SumSeeds").getRange(2,i-1).getValue());
+    for(j=2;j<columnLightEnergy+1;j++){
+      lastLightEnergy = normalizeNaN(activeSpreadsheet.getSheetByName("LightEnergy").getRange(rowLightEnergy,j).getValue());
+      lastBonus = normalizeNaN(activeSpreadsheet.getSheetByName("Bonus").getRange(rowBonus,j).getValue());
+      sumSeed = normalizeNaN(activeSpreadsheet.getSheetByName("SumSeeds").getRange(2,j-1).getValue());
       lastRowItem = lastLightEnergy + (sumSeed * 10000) + lastBonus;
-      activeSpreadsheet.getSheetByName("Ranking").getRange(2,i-1).setValue(lastRowItem);
+      activeSpreadsheet.getSheetByName("Ranking").getRange(2,j-1).setValue(lastRowItem);
     }
   }
